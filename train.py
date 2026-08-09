@@ -116,7 +116,7 @@ from tensorflow.keras.optimizers import Adam
 model.compile(optimizer=Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
 callbacks = [
     EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True),
-    ModelCheckpoint('best_model.keras', monitor='val_accuracy', save_best_only=True)
+    ModelCheckpoint('model.weights.h5', monitor='val_accuracy', save_best_only=True)
 ]
 
 history = model.fit(
@@ -126,8 +126,7 @@ history = model.fit(
     callbacks=callbacks
 )
 
-from google.colab import files
-files.download('best_model.keras')
+files.download("model.weights.h5")
 
 import json
 with open('labels.json', 'w') as f:
